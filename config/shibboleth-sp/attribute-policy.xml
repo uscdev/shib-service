@@ -1,0 +1,29 @@
+<afp:AttributeFilterPolicyGroup
+    xmlns="urn:mace:shibboleth:2.0:afp:mf:basic"
+    xmlns:basic="urn:mace:shibboleth:2.0:afp:mf:basic"
+    xmlns:afp="urn:mace:shibboleth:2.0:afp"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <afp:AttributeFilterPolicy>
+        <!-- This policy is in effect in all cases. -->
+        <afp:PolicyRequirementRule xsi:type="ANY"/>
+
+        <!-- 
+        	At USC, attribute policies are enforced at the IdP level, 
+        	so the simple policy for the service provider side is
+        	to pass everything through unmolested.  Policy configuration 
+        	has the potential for many filtering and manipulation features
+        	which you may want to configure if you choose, so for details 
+        	on such custom configurations, check out the 
+        	Shibboleth Internet2 Wiki
+        	
+        	https://spaces.internet2.edu/display/SHIB2/AFPAttributeFilterPolicy
+        -->
+
+        <afp:AttributeRule attributeID="*">
+            <afp:PermitValueRule xsi:type="ANY"/>
+        </afp:AttributeRule>
+        
+    </afp:AttributeFilterPolicy>
+
+</afp:AttributeFilterPolicyGroup>

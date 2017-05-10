@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- USC Metadata -->
+<!-- $Id: USC-metadata.xml 4523 2011-03-24 20:20:47Z beall $ -->
+
+<EntitiesDescriptor
+	xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+	xmlns:shibmd="urn:mace:shibboleth:metadata:1.0"
+	xsi:schemaLocation="urn:oasis:names:tc:SAML:2.0:metadata ../schemas/saml-schema-metadata-2.0.xsd urn:mace:shibboleth:metadata:1.0 ../schemas/shibboleth-metadata-1.0.xsd http://www.w3.org/2000/09/xmldsig# ../schemas/xmldsig-core-schema.xsd"
+	Name="https://www.usc.edu/shibboleth-sites"
+	validUntil="2028-04-06T00:00:00Z">
+
+<!-- 
+The "validUntil" date above is very important to maintain.  It should probably
+match the expiration date of the IdP certificate. 
+-->
+
+	<!-- Production IdP -->
+	<EntityDescriptor entityID="https://shibboleth.usc.edu/shibboleth-idp">
+
+		<IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol urn:mace:shibboleth:1.0">
+			<Extensions>
+				<shibmd:Scope regexp="false">usc.edu</shibmd:Scope>
+			</Extensions>
+
+<!-- When updating this cert, be sure to update the "validUntil" attribute above. -->
+
+			<!-- Self-signed certificate for shibboleth.usc.edu (expires 2028-04-06) -->
+			<KeyDescriptor>
+				<ds:KeyInfo>
+					<ds:X509Data>
+						<ds:X509Certificate>
+MIIE8TCCA9mgAwIBAgIJAILX6jYUWTNAMA0GCSqGSIb3DQEBBQUAMIGrMQswCQYD
+VQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEUMBIGA1UEBxMLTG9zIEFuZ2Vs
+ZXMxKjAoBgNVBAoTIVVuaXZlcnNpdHkgb2YgU291dGhlcm4gQ2FsaWZvcm5pYTEo
+MCYGA1UECxMfSW5mb3JtYXRpb24gVGVjaG5vbG9neSBTZXJ2aWNlczEbMBkGA1UE
+AxMSc2hpYmJvbGV0aC51c2MuZWR1MB4XDTA4MDQxMTE1MDkxMVoXDTI4MDQwNjE1
+MDkxMVowgasxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRQwEgYD
+VQQHEwtMb3MgQW5nZWxlczEqMCgGA1UEChMhVW5pdmVyc2l0eSBvZiBTb3V0aGVy
+biBDYWxpZm9ybmlhMSgwJgYDVQQLEx9JbmZvcm1hdGlvbiBUZWNobm9sb2d5IFNl
+cnZpY2VzMRswGQYDVQQDExJzaGliYm9sZXRoLnVzYy5lZHUwggEiMA0GCSqGSIb3
+DQEBAQUAA4IBDwAwggEKAoIBAQCNQzNc1b3P2I6epvRfG/TKfd0ec6z571CpQu2s
+VDoJmb/xfi0g6ZqTjF11GNLglUAGh3sgrQ6Gmcve9YNGNSOQdLwH0i7OU31cRV9x
+dPpiOKbYI50rTNW94ZX1w8Lzo35lvqJV9KdPgYgy3pnL795qvpcy8ID2nBysTtrx
+CV0Y679U3imMrtYBhhHAP+lYybAvt3F60AkLUc429UfD2/9BdZb6CjpRw4bbcB6T
+H46BIXAf00HvXKRxD+FqCAJZAlwmcC7xwM2RJK+sLE8e++BIGHM5EHuxnKXul8Et
+SBAXZyfBxYK9xQGtCWHO0JKjQA7BEle+goochefqhAQt0Mo9AgMBAAGjggEUMIIB
+EDAdBgNVHQ4EFgQUFmYhab5cLD2sfj+Lhwfg7cBICqQwgeAGA1UdIwSB2DCB1YAU
+FmYhab5cLD2sfj+Lhwfg7cBICqShgbGkga4wgasxCzAJBgNVBAYTAlVTMRMwEQYD
+VQQIEwpDYWxpZm9ybmlhMRQwEgYDVQQHEwtMb3MgQW5nZWxlczEqMCgGA1UEChMh
+VW5pdmVyc2l0eSBvZiBTb3V0aGVybiBDYWxpZm9ybmlhMSgwJgYDVQQLEx9JbmZv
+cm1hdGlvbiBUZWNobm9sb2d5IFNlcnZpY2VzMRswGQYDVQQDExJzaGliYm9sZXRo
+LnVzYy5lZHWCCQCC1+o2FFkzQDAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBBQUA
+A4IBAQA89qr8lkuZxpqq6n2zipfQVxpMruaJB5umzvoEP1apWz3nKSKNAUG+qUcf
++6IN9B5QaB6DgDwtGnfh015fooFTqhUkoyQ5CKpRxfkS4d/bx6ph7Bh4Zs5HfWac
+C0FP2f7eJ1XBETBK8khT5ANLKTr+zSWLE1m2J/CWV62i9FY/NZPQgSeQaHnx4e+O
+n/lHMJxhon8zHN32lBLeYk97s511BaBRyO+iZtCultWjuEna1AHdRwWK2QuSwuC+
+iLZpZ1rEGIhRuzzrW6ibFmtc5Gw0vr+9lGz46M+1rETrMBzLkH/Xk9ge3fZxnv/8
+FUhh8p0RUO3Wc3IzNUWLnAt/F9Xb
+						</ds:X509Certificate>
+					</ds:X509Data>
+				</ds:KeyInfo>
+			</KeyDescriptor>
+
+    		<ArtifactResolutionService index="1" 
+    			Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding" 
+    			Location="https://shibboleth.usc.edu:8443/idp/profile/SAML1/SOAP/ArtifactResolution" />
+
+			<ArtifactResolutionService index="2" 
+				Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" 
+				Location="https://shibboleth.usc.edu:8443/idp/profile/SAML2/SOAP/ArtifactResolution" />
+
+			<NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
+			<NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</NameIDFormat>
+			<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+			<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</NameIDFormat>
+
+			<SingleSignOnService Binding="urn:mace:shibboleth:1.0:profiles:AuthnRequest"
+				Location="https://shibboleth.usc.edu/idp/profile/Shibboleth/SSO" />
+
+			<SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" 
+				Location="https://shibboleth.usc.edu/idp/profile/SAML2/POST/SSO" />
+
+			<SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" 
+				Location="https://shibboleth.usc.edu/idp/profile/SAML2/POST-SimpleSign/SSO" />
+
+			<SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" 
+				Location="https://shibboleth.usc.edu/idp/profile/SAML2/Redirect/SSO" />
+
+		</IDPSSODescriptor>
+
+		<AttributeAuthorityDescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol">
+			<Extensions>
+				<shibmd:Scope regexp="false">usc.edu</shibmd:Scope>
+			</Extensions>
+
+			<!-- Self-signed certificate for shibboleth.usc.edu (expires 2028-04-06) -->
+			<KeyDescriptor>
+				<ds:KeyInfo>
+					<ds:X509Data>
+						<ds:X509Certificate>
+MIIE8TCCA9mgAwIBAgIJAILX6jYUWTNAMA0GCSqGSIb3DQEBBQUAMIGrMQswCQYD
+VQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEUMBIGA1UEBxMLTG9zIEFuZ2Vs
+ZXMxKjAoBgNVBAoTIVVuaXZlcnNpdHkgb2YgU291dGhlcm4gQ2FsaWZvcm5pYTEo
+MCYGA1UECxMfSW5mb3JtYXRpb24gVGVjaG5vbG9neSBTZXJ2aWNlczEbMBkGA1UE
+AxMSc2hpYmJvbGV0aC51c2MuZWR1MB4XDTA4MDQxMTE1MDkxMVoXDTI4MDQwNjE1
+MDkxMVowgasxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRQwEgYD
+VQQHEwtMb3MgQW5nZWxlczEqMCgGA1UEChMhVW5pdmVyc2l0eSBvZiBTb3V0aGVy
+biBDYWxpZm9ybmlhMSgwJgYDVQQLEx9JbmZvcm1hdGlvbiBUZWNobm9sb2d5IFNl
+cnZpY2VzMRswGQYDVQQDExJzaGliYm9sZXRoLnVzYy5lZHUwggEiMA0GCSqGSIb3
+DQEBAQUAA4IBDwAwggEKAoIBAQCNQzNc1b3P2I6epvRfG/TKfd0ec6z571CpQu2s
+VDoJmb/xfi0g6ZqTjF11GNLglUAGh3sgrQ6Gmcve9YNGNSOQdLwH0i7OU31cRV9x
+dPpiOKbYI50rTNW94ZX1w8Lzo35lvqJV9KdPgYgy3pnL795qvpcy8ID2nBysTtrx
+CV0Y679U3imMrtYBhhHAP+lYybAvt3F60AkLUc429UfD2/9BdZb6CjpRw4bbcB6T
+H46BIXAf00HvXKRxD+FqCAJZAlwmcC7xwM2RJK+sLE8e++BIGHM5EHuxnKXul8Et
+SBAXZyfBxYK9xQGtCWHO0JKjQA7BEle+goochefqhAQt0Mo9AgMBAAGjggEUMIIB
+EDAdBgNVHQ4EFgQUFmYhab5cLD2sfj+Lhwfg7cBICqQwgeAGA1UdIwSB2DCB1YAU
+FmYhab5cLD2sfj+Lhwfg7cBICqShgbGkga4wgasxCzAJBgNVBAYTAlVTMRMwEQYD
+VQQIEwpDYWxpZm9ybmlhMRQwEgYDVQQHEwtMb3MgQW5nZWxlczEqMCgGA1UEChMh
+VW5pdmVyc2l0eSBvZiBTb3V0aGVybiBDYWxpZm9ybmlhMSgwJgYDVQQLEx9JbmZv
+cm1hdGlvbiBUZWNobm9sb2d5IFNlcnZpY2VzMRswGQYDVQQDExJzaGliYm9sZXRo
+LnVzYy5lZHWCCQCC1+o2FFkzQDAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBBQUA
+A4IBAQA89qr8lkuZxpqq6n2zipfQVxpMruaJB5umzvoEP1apWz3nKSKNAUG+qUcf
++6IN9B5QaB6DgDwtGnfh015fooFTqhUkoyQ5CKpRxfkS4d/bx6ph7Bh4Zs5HfWac
+C0FP2f7eJ1XBETBK8khT5ANLKTr+zSWLE1m2J/CWV62i9FY/NZPQgSeQaHnx4e+O
+n/lHMJxhon8zHN32lBLeYk97s511BaBRyO+iZtCultWjuEna1AHdRwWK2QuSwuC+
+iLZpZ1rEGIhRuzzrW6ibFmtc5Gw0vr+9lGz46M+1rETrMBzLkH/Xk9ge3fZxnv/8
+FUhh8p0RUO3Wc3IzNUWLnAt/F9Xb
+						</ds:X509Certificate>
+					</ds:X509Data>
+				</ds:KeyInfo>
+			</KeyDescriptor>
+
+			<AttributeService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding"
+				Location="https://shibboleth.usc.edu:8443/idp/profile/SAML1/SOAP/AttributeQuery"/>
+
+			<AttributeService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"
+				Location="https://shibboleth.usc.edu:8443/idp/profile/SAML2/SOAP/AttributeQuery"/>
+
+			<NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
+			<NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</NameIDFormat>
+			<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+			<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</NameIDFormat>
+
+		</AttributeAuthorityDescriptor>
+
+		<Organization>
+			<OrganizationName xml:lang="en">University of Southern California</OrganizationName>
+			<OrganizationDisplayName xml:lang="en">University of Southern California</OrganizationDisplayName>
+			<OrganizationURL xml:lang="en">http://www.usc.edu/</OrganizationURL>
+		</Organization>
+		<ContactPerson contactType="technical">
+			<GivenName>Shibboleth</GivenName>
+			<SurName>Admin</SurName>
+			<EmailAddress>shib-admin-l@usc.edu</EmailAddress>
+		</ContactPerson>
+		<ContactPerson contactType="administrative">
+			<GivenName>Asbed</GivenName>
+			<SurName>Bedrossian</SurName>
+			<EmailAddress>asbed@usc.edu</EmailAddress>
+		</ContactPerson>
+		<ContactPerson contactType="administrative">
+			<GivenName>Brendan</GivenName>
+			<SurName>Bellina</SurName>
+			<EmailAddress>bbellina@usc.edu</EmailAddress>
+		</ContactPerson>
+
+	</EntityDescriptor>
+
+
+	<!-- Test IdP -->
+	<EntityDescriptor entityID="https://shibboleth-test.usc.edu/shibboleth-idp">
+
+		<IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol urn:mace:shibboleth:1.0">
+			<Extensions>
+				<shibmd:Scope>usc.edu</shibmd:Scope>
+			</Extensions>
+
+			<!-- self signed certificate for shibboleth-test.usc.edu (expires 2027-06-15) -->
+			<KeyDescriptor>
+				<ds:KeyInfo>
+					<ds:X509Data>
+						<ds:X509Certificate>
+MIID+zCCA2SgAwIBAgIJAM9gDyT/eWXnMA0GCSqGSIb3DQEBBQUAMIGwMQswCQYD
+VQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEUMBIGA1UEBxMLTG9zIEFuZ2Vs
+ZXMxKjAoBgNVBAoTIVVuaXZlcnNpdHkgb2YgU291dGhlcm4gQ2FsaWZvcm5pYTEo
+MCYGA1UECxMfSW5mb3JtYXRpb24gVGVjaG5vbG9neSBTZXJ2aWNlczEgMB4GA1UE
+AxMXc2hpYmJvbGV0aC10ZXN0LnVzYy5lZHUwHhcNMDgwNDE1MjMwNTQwWhcNMjcw
+NjE1MjMwNTQwWjCBsDELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWEx
+FDASBgNVBAcTC0xvcyBBbmdlbGVzMSowKAYDVQQKEyFVbml2ZXJzaXR5IG9mIFNv
+dXRoZXJuIENhbGlmb3JuaWExKDAmBgNVBAsTH0luZm9ybWF0aW9uIFRlY2hub2xv
+Z3kgU2VydmljZXMxIDAeBgNVBAMTF3NoaWJib2xldGgtdGVzdC51c2MuZWR1MIGf
+MA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDVSSbS6W8iRmsOQWIdc9EIAF9qazGZ
+zpyYQAjagKZjDFVg+vs4nTBUYkSx7jYfsoqDZeudGpGY3g/ZS8rb7skADaCzZpmm
+keG1i+nMtpO3NsdmFMAhKrO+Njd/GG0BJaifQJkBVk4RVOZRnxtp/KD0iei36tiq
+ZgyW5k9gdFnHSQIDAQABo4IBGTCCARUwHQYDVR0OBBYEFOe0PAgSDVY+6mQdH8lO
+BS6ilEl6MIHlBgNVHSMEgd0wgdqAFOe0PAgSDVY+6mQdH8lOBS6ilEl6oYG2pIGz
+MIGwMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEUMBIGA1UEBxML
+TG9zIEFuZ2VsZXMxKjAoBgNVBAoTIVVuaXZlcnNpdHkgb2YgU291dGhlcm4gQ2Fs
+aWZvcm5pYTEoMCYGA1UECxMfSW5mb3JtYXRpb24gVGVjaG5vbG9neSBTZXJ2aWNl
+czEgMB4GA1UEAxMXc2hpYmJvbGV0aC10ZXN0LnVzYy5lZHWCCQDPYA8k/3ll5zAM
+BgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBBQUAA4GBAEdmA4rYmS9ZbgwLVfUQszSu
+Sjz6wDpKGhgDO5/Tv9BfNoqfjDgkcLbkFQTZd5196f6khxtQui6REHYUddUJgaEk
+iUuUFfoW4cemx3jppN4AQ8XkaG38CJsWzgrvpmFOf1WV6nHO59H+VphOdPI6N7TX
+vn4C0gfWyR2lquFRhEoN
+						</ds:X509Certificate>
+					</ds:X509Data>
+				</ds:KeyInfo>
+			</KeyDescriptor>
+
+    		<ArtifactResolutionService index="1" 
+    			Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding" 
+    			Location="https://shibboleth-test.usc.edu:8443/idp/profile/SAML1/SOAP/ArtifactResolution" />
+
+			<ArtifactResolutionService index="2" 
+				Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" 
+				Location="https://shibboleth-test.usc.edu:8443/idp/profile/SAML2/SOAP/ArtifactResolution" />
+
+			<NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
+			<NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</NameIDFormat>
+			<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+			<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</NameIDFormat>
+
+			<SingleSignOnService Binding="urn:mace:shibboleth:1.0:profiles:AuthnRequest"
+				Location="https://shibboleth-test.usc.edu/idp/profile/Shibboleth/SSO" />
+
+			<SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" 
+				Location="https://shibboleth-test.usc.edu/idp/profile/SAML2/POST/SSO" />
+
+			<SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" 
+				Location="https://shibboleth-test.usc.edu/idp/profile/SAML2/POST-SimpleSign/SSO" />
+
+			<SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" 
+				Location="https://shibboleth-test.usc.edu/idp/profile/SAML2/Redirect/SSO" />
+				
+		</IDPSSODescriptor>
+
+		<AttributeAuthorityDescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol">
+			<Extensions>
+				<shibmd:Scope>usc.edu</shibmd:Scope>
+			</Extensions>
+
+			<!-- self signed certificate for shibboleth-test.usc.edu (expires 2027-06-15) -->
+			<KeyDescriptor>
+				<ds:KeyInfo>
+					<ds:X509Data>
+						<ds:X509Certificate>
+MIID+zCCA2SgAwIBAgIJAM9gDyT/eWXnMA0GCSqGSIb3DQEBBQUAMIGwMQswCQYD
+VQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEUMBIGA1UEBxMLTG9zIEFuZ2Vs
+ZXMxKjAoBgNVBAoTIVVuaXZlcnNpdHkgb2YgU291dGhlcm4gQ2FsaWZvcm5pYTEo
+MCYGA1UECxMfSW5mb3JtYXRpb24gVGVjaG5vbG9neSBTZXJ2aWNlczEgMB4GA1UE
+AxMXc2hpYmJvbGV0aC10ZXN0LnVzYy5lZHUwHhcNMDgwNDE1MjMwNTQwWhcNMjcw
+NjE1MjMwNTQwWjCBsDELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWEx
+FDASBgNVBAcTC0xvcyBBbmdlbGVzMSowKAYDVQQKEyFVbml2ZXJzaXR5IG9mIFNv
+dXRoZXJuIENhbGlmb3JuaWExKDAmBgNVBAsTH0luZm9ybWF0aW9uIFRlY2hub2xv
+Z3kgU2VydmljZXMxIDAeBgNVBAMTF3NoaWJib2xldGgtdGVzdC51c2MuZWR1MIGf
+MA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDVSSbS6W8iRmsOQWIdc9EIAF9qazGZ
+zpyYQAjagKZjDFVg+vs4nTBUYkSx7jYfsoqDZeudGpGY3g/ZS8rb7skADaCzZpmm
+keG1i+nMtpO3NsdmFMAhKrO+Njd/GG0BJaifQJkBVk4RVOZRnxtp/KD0iei36tiq
+ZgyW5k9gdFnHSQIDAQABo4IBGTCCARUwHQYDVR0OBBYEFOe0PAgSDVY+6mQdH8lO
+BS6ilEl6MIHlBgNVHSMEgd0wgdqAFOe0PAgSDVY+6mQdH8lOBS6ilEl6oYG2pIGz
+MIGwMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEUMBIGA1UEBxML
+TG9zIEFuZ2VsZXMxKjAoBgNVBAoTIVVuaXZlcnNpdHkgb2YgU291dGhlcm4gQ2Fs
+aWZvcm5pYTEoMCYGA1UECxMfSW5mb3JtYXRpb24gVGVjaG5vbG9neSBTZXJ2aWNl
+czEgMB4GA1UEAxMXc2hpYmJvbGV0aC10ZXN0LnVzYy5lZHWCCQDPYA8k/3ll5zAM
+BgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBBQUAA4GBAEdmA4rYmS9ZbgwLVfUQszSu
+Sjz6wDpKGhgDO5/Tv9BfNoqfjDgkcLbkFQTZd5196f6khxtQui6REHYUddUJgaEk
+iUuUFfoW4cemx3jppN4AQ8XkaG38CJsWzgrvpmFOf1WV6nHO59H+VphOdPI6N7TX
+vn4C0gfWyR2lquFRhEoN
+						</ds:X509Certificate>
+					</ds:X509Data>
+				</ds:KeyInfo>
+			</KeyDescriptor>
+
+			<AttributeService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding"
+				Location="https://shibboleth-test.usc.edu:8443/idp/profile/SAML1/SOAP/AttributeQuery"/>
+
+			<AttributeService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"
+				Location="https://shibboleth-test.usc.edu:8443/idp/profile/SAML2/SOAP/AttributeQuery"/>
+
+			<NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
+			<NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</NameIDFormat>
+			<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+			<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</NameIDFormat>
+
+		</AttributeAuthorityDescriptor>
+
+		<Organization>
+			<OrganizationName xml:lang="en">University of Southern California</OrganizationName>
+			<OrganizationDisplayName xml:lang="en">University of Southern California (Test IdP)</OrganizationDisplayName>
+			<OrganizationURL xml:lang="en">http://www.usc.edu/</OrganizationURL>
+		</Organization>
+		<ContactPerson contactType="technical">
+			<GivenName>Shibboleth</GivenName>
+			<SurName>Admin</SurName>
+			<EmailAddress>shib-admin-l@usc.edu</EmailAddress>
+		</ContactPerson>
+		<ContactPerson contactType="administrative">
+			<GivenName>Asbed</GivenName>
+			<SurName>Bedrossian</SurName>
+			<EmailAddress>asbed@usc.edu</EmailAddress>
+		</ContactPerson>
+		<ContactPerson contactType="administrative">
+			<GivenName>Brendan</GivenName>
+			<SurName>Bellina</SurName>
+			<EmailAddress>bbellina@usc.edu</EmailAddress>
+		</ContactPerson>
+
+	</EntityDescriptor>
+
+</EntitiesDescriptor>

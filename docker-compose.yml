@@ -1,0 +1,36 @@
+version: '3.1'
+services:
+  shib-service:
+    image: uscdev/shib-service
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - SERVER_NAME=${SERVER_NAME}
+    networks:
+      web-bus:
+    secrets:
+      - apache.crt
+      - apache.key
+      - sp-key.pem
+      - sp-cert.pem
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+networks:
+  web-bus:
+    external:
+      name: web-bus
+secrets:
+  apache.crt:
+    external: true
+  apache.key:
+    external: true
+  sp-key.pem:
+    external: true
+  sp-cert.pem:
+    external: true

@@ -1,0 +1,90 @@
+<Attributes xmlns="urn:mace:shibboleth:2.0:attribute-map" 
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <!-- 
+        Presented here are commonly used attribute definitions which
+        may be released via an Attribute Access Request.
+        
+        You may need to customize these filters based on your specific
+        attributes approved for release. 
+        
+        The identifiers presented within the "id=" and "aliases=" blocks
+        will result in environment variables passed to your application.
+        You may rename these as you see fit.  You may also add multiple
+        names within the quotes of aliases="" separated by spaces.
+        
+        These will not appear as HTTP headers to the application because 
+        that method is less secure than using the environment.  However
+        if you insist on using HTTP headers, you may turn them on in
+        the service provider configuration file shibboleth2.xml.
+    -->
+
+    <!-- 
+        Entitlement is the key to the door of your application.  Attributes will
+        not be returned to your application for users who do not have the specific
+        entitlement which is assigned to your application.  You should use the
+        existence of this value as a determining factor for whether or not you
+        let someone into your application.  Plus, you should check its value 
+        against the specific value which will be provided to you when you are
+        fully enabled in the IdP.
+    -->
+    <Attribute name="urn:mace:dir:attribute-def:eduPersonEntitlement"          id="ShibEPEntitlement" aliases="entitlement" />
+    <Attribute name="urn:oid:1.3.6.1.4.1.5923.1.1.1.7"                         id="ShibEPEntitlement" aliases="entitlement" />
+    <Attribute name="urn:mace:dir:attribute-def:uid"                           id="ShibUID" />
+    <Attribute name="urn:oid:0.9.2342.19200300.100.1.1"                        id="ShibUID" />
+    <Attribute name="urn:mace:dir:attribute-def:displayName"                   id="ShibdisplayName" />
+    <Attribute name="urn:oid:2.16.840.1.113730.3.1.241"                        id="ShibdisplayName"/>
+    <Attribute name="urn:mace:dir:attribute-def:givenName"                     id="ShibgivenName" aliases="firstName" />
+    <Attribute name="urn:oid:2.5.4.42"                                         id="ShibgivenName" aliases="firstName" />    
+    <Attribute name="urn:mace:dir:attribute-def:sn"                            id="Shibsurname"   aliases="lastName"/>
+    <Attribute name="urn:oid:2.5.4.4"                                          id="Shibsurname"   aliases="lastName" />
+    <Attribute name="urn:mace:dir:attribute-def:mail"                          id="Shibmail" />
+    <Attribute name="urn:oid:0.9.2342.19200300.100.1.3"                        id="Shibmail" />
+    <!-- The above attributes appear in two forms because the names changed between SAML1 and SAML2.
+         In SAML2, the use of OID values became the naming convention. 
+    -->
+
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscUSCID"              id="ShibuscUSCID" />
+    <!-- 
+        uscHistoricalUSCID is a multi-valued attribute.  A person may have zero
+        or more of these.  If your application is authorized to receive this value
+        then it will either not appear at all for a person who has only 
+        one USCID and no historical USCIDs, or it will appear with a single value,
+        or it will appear as a semicolon-delimited list of USCID values for a
+        person who has gone through several merges.
+        This should be checked in case someone goes through has a change to their USCID
+        but your application depends on the person having a particular USCID. 
+    -->
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscHistoricalUSCID"    id="ShibuscHistoricalIDs" />
+
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscNetID"              id="ShibuscNetID" />
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscPID"                id="ShibuscPID" />
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscEID"                id="ShibuscEID" />
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscOwnerPvid"          id="ShibuscOwnerPvid" />
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscPvid"               id="ShibuscPvid" />
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscAffiliation"        id="ShibuscAffiliation" />
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscPrimaryAffiliation" id="ShibuscPrimaryAffiliation" />
+
+    <!--
+        Some attributes are scoped (meaning they have @usc.edu attached).  Here is an example. 
+    -->
+    <Attribute name="urn:mace:dir:attribute-def:eduPersonScopedAffiliation" id="ShibEPAffiliation" aliases="affliation">
+        <AttributeDecoder xsi:type="ScopedAttributeDecoder" caseSensitive="false"/>
+    </Attribute>
+    
+    <!-- 
+        All applications receive a transient name identifier.  Do not delete this entry.
+    -->
+    <Attribute name="urn:oasis:names:tc:SAML:2.0:nameid-format:transient" id="transientID">
+        <AttributeDecoder xsi:type="NameIDAttributeDecoder" formatter="$NameQualifier!$SPNameQualifier!$Name"/>
+    </Attribute>
+
+    <!-- 
+        Applications may receive a persistent name identifier.  This is reserved
+        for future use.  Do not delete this entry.
+    -->
+    <Attribute name="urn:oasis:names:tc:SAML:2.0:nameid-format:persistent" id="persistentID">
+        <AttributeDecoder xsi:type="NameIDAttributeDecoder" formatter="$NameQualifier!$SPNameQualifier!$Name"/>
+    </Attribute>
+
+</Attributes>

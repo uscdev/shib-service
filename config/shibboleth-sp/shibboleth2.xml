@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<SPConfig xmlns="urn:mace:shibboleth:2.0:native:sp:config"
+    xmlns:conf="urn:mace:shibboleth:2.0:native:sp:config"
+    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+    xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"    
+    xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+    logger="/etc/shibboleth/syslog.logger" clockSkew="180">
+
+    <!-- The OutOfProcess section contains properties affecting the shibd daemon. -->
+    <OutOfProcess logger="/etc/shibboleth/shibd.logger">
+        <!--
+        <Extensions>
+            <Library path="odbc-store.so" fatal="true"/>
+        </Extensions>
+        -->
+    </OutOfProcess>
+
+    <InProcess logger="/etc/shibboleth/native.logger" />
+
+    <UnixListener address="shibd.sock" />
+    <!-- This set of components stores sessions and other persistent data in daemon memory. -->
+    <StorageService type="Memory" id="mem" cleanupInterval="900"/>
+    <SessionCache type="StorageService" StorageService="mem" cacheTimeout="3600" inprocTimeout="900" cleanupInterval="900"/>
+    <ReplayCache StorageService="mem"/>
+    <ArtifactMap artifactTTL="180"/>
+
+    <!-- This set of components stores sessions and other persistent data in an ODBC database. -->
+    <!--
+    <StorageService type="ODBC" id="db" cleanupInterval="900">
+        <ConnectionString>
+        DRIVER=drivername;SERVER=dbserver;UID=shibboleth;PWD=password;DATABASE=shibboleth;APP=Shibboleth
+        </ConnectionString>
+    </StorageService>
+    <SessionCache type="StorageService" StorageService="db" cacheTimeout="3600" inprocTimeout="900" cleanupInterval="900"/>
+    <ReplayCache StorageService="db"/>
+    <ArtifactMap StorageService="db" artifactTTL="180"/>
+    -->
+
+    <!-- To customize behavior, map hostnames and path components to applicationId and other settings. -->
+    <RequestMapper type="Native">
+        <RequestMap applicationId="default">
+            <!--
+            The example requires a session for documents in /secure on the containing host with http and
+            https on the default ports. Note that the name and port in the <Host> elements MUST match
+            Apache's ServerName and Port directives or the IIS Site name in the <ISAPI> element
+            below.
+            -->
+
+            <Host name="localhost/secure" 
+                  applicationId="rename--my-application-name" 
+                  authType="shibboleth" 
+                  requireSession="true" 
+                  exportAssertion="true">
+                <AccessControl>
+                    <!-- IMPORTANT: You must replace this with your application's entitlement
+                         when switching to production! -->
+                    <Rule require="entitlement">urn:mace:usc.edu:gds:entitlement:stmn7vt3</Rule>
+                </AccessControl>
+             </Host>
+
+            <!-- Examples of a second vhost mapped to a different applicationId. -->
+            <!--
+            <Host name="admin.example.org" applicationId="admin" authType="shibboleth" requireSession="true"/>
+            or
+            <Host name="admin.example.org">
+                <Path name="applicationPath" applicationId="admin" authType="shibboleth" requireSession="true" exportAssertion="false">
+                    <AccessControl>
+                        <Rule require="entitlement">urn:mace:usc.edu:gds:entitlement:yourentitlementvaluehere</Rule>
+                    </AccessControl>
+                </Path>
+            </Host>
+            -->
+        </RequestMap>
+    </RequestMapper>
+
+    <!--
+    The ApplicationDefaults element is where most of Shibboleth's SAML bits are defined.
+    Resource requests are mapped by the RequestMapper to an applicationId that
+    points into to this section.
+    
+    These are the default global settings for all applications.  
+    !DO NOT CHANGE THIS SECTION!  Application-specific settings are set in the 
+    <ApplicationOverride> section.
+    -->
+    <ApplicationDefaults id="default" policyId="default"
+        entityID="https://www.usc.edu/do-not-use"
+        homeURL="https://www.usc.edu/"
+        REMOTE_USER="eppn persistent-id targeted-id"
+        signing="true" encryption="false"
+        >
+
+        <!--
+        Controls session lifetimes, address checks, cookie handling, and the protocol handlers.
+        You MUST supply an effectively unique handlerURL value for each of your applications.
+        The value can be a relative path, a URL with no hostname (https:///path) or a full URL.
+        The system can compute a relative value based on the virtual host. Using handlerSSL="true"
+        will force the protocol to be https. You should also add a cookieProps setting of "; path=/; secure; HttpOnly"
+        in that case. Note that while we default checkAddress to "false", this has a negative
+        impact on the security of the SP. Stealing cookies/sessions is much easier with this disabled.
+        -->
+        <Sessions lifetime="7200" timeout="3600" checkAddress="false" consistentAddress="true"
+            handlerURL="/Shibboleth.sso" handlerSSL="true"
+            exportLocation="http://localhost/Shibboleth.sso/GetAssertion"
+            cookieProps="; path=/; secure; HttpOnly" 
+            idpHistory="true" idpHistoryDays="7">
+            
+            <!--
+            SessionInitiators handle session requests and relay them to a Discovery page,
+            or to an IdP if possible. Automatic session setup will use the default or first
+            element (or requireSessionWith can specify a specific id to use).
+            -->
+
+            <!-- Default example directs to a specific IdP's SSO service (favoring SAML 2 over Shib 1). -->
+ 
+            <SessionInitiator type="Chaining" Location="/Login" isDefault="true" id="Intranet"
+                    relayState="cookie" entityID="https://shibboleth-test.usc.edu/shibboleth-idp"
+                    acsByIndex="false">
+                <SessionInitiator type="SAML2" acsIndex="1" template="bindingTemplate.html"/>
+                <SessionInitiator type="Shib1" acsIndex="5"/>
+            </SessionInitiator>
+
+            
+            <!-- An example using an old-style WAYF, which means Shib 1 only unless an entityID is provided. -->
+            <SessionInitiator type="Chaining" Location="/WAYF/shibboleth.usc.edu" id="usc" relayState="cookie">
+                <SessionInitiator type="SAML2" acsIndex="1" template="bindingTemplate.html"/>
+                <SessionInitiator type="Shib1" acsIndex="5"/>
+                <SessionInitiator type="WAYF" acsIndex="5" URL="https://shibboleth-test.usc.edu/idp/profile/Shibboleth/SSO"/>
+            </SessionInitiator>
+
+            
+            <!--
+            md:AssertionConsumerService locations handle specific SSO protocol bindings,
+            such as SAML 2.0 POST or SAML 1.1 Artifact. The isDefault and index attributes
+            are used when sessions are initiated to determine how to tell the IdP where and
+            how to return the response.
+            -->
+            <md:AssertionConsumerService Location="/SAML2/POST" index="1"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"/>
+            <md:AssertionConsumerService Location="/SAML2/POST-SimpleSign" index="2"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign"/>
+            <md:AssertionConsumerService Location="/SAML2/Artifact" index="3"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact"/>
+            <md:AssertionConsumerService Location="/SAML2/ECP" index="4"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS"/>
+            <md:AssertionConsumerService Location="/SAML/POST" index="5"
+                Binding="urn:oasis:names:tc:SAML:1.0:profiles:browser-post"/>
+            <md:AssertionConsumerService Location="/SAML/Artifact" index="6"
+                Binding="urn:oasis:names:tc:SAML:1.0:profiles:artifact-01"/>
+
+            <!-- LogoutInitiators enable SP-initiated local or global/single logout of sessions. -->
+            <LogoutInitiator type="Chaining" Location="/Logout" relayState="cookie" >
+<!--                <LogoutInitiator type="SAML2" template="bindingTemplate.html"/>  -->
+                <LogoutInitiator type="Local" />
+            </LogoutInitiator>
+
+            <!-- md:SingleLogoutService locations handle single logout (SLO) protocol messages. -->
+            <md:SingleLogoutService Location="/SLO/SOAP"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"/>
+            <md:SingleLogoutService Location="/SLO/Redirect" conf:template="bindingTemplate.html"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"/>
+            <md:SingleLogoutService Location="/SLO/POST" conf:template="bindingTemplate.html"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"/>
+            <md:SingleLogoutService Location="/SLO/Artifact" conf:template="bindingTemplate.html"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact"/>
+
+            <!-- md:ManageNameIDService locations handle NameID management (NIM) protocol messages. -->
+            <md:ManageNameIDService Location="/NIM/SOAP"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"/>
+            <md:ManageNameIDService Location="/NIM/Redirect" conf:template="bindingTemplate.html"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"/>
+            <md:ManageNameIDService Location="/NIM/POST" conf:template="bindingTemplate.html"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"/>
+            <md:ManageNameIDService Location="/NIM/Artifact" conf:template="bindingTemplate.html"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact"/>
+
+            <!--
+            md:ArtifactResolutionService locations resolve artifacts issued when using the
+            SAML 2.0 HTTP-Artifact binding on outgoing messages, generally uses SOAP.
+            -->
+            <md:ArtifactResolutionService Location="/Artifact/SOAP" index="1"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"/>
+
+            <!-- Extension service that generates "approximate" metadata based on SP configuration. -->
+            <Handler type="MetadataGenerator" Location="/Metadata" signing="false"/>
+
+            <!-- Status reporting service. -->
+            <Handler type="Status" Location="/Status" acl="127.0.0.1"/>
+
+            <!-- Session diagnostic service. -->
+            <Handler type="Session" Location="/Session" showAttributeValues="true" />
+
+        </Sessions>
+
+        <!--
+        You should customize these pages! You can add attributes with values that can be plugged
+        into your templates. You can remove the access attribute to cause the module to return a
+        standard 403 Forbidden error code if authorization fails, and then customize that condition
+        using your web server.
+        -->
+        <Errors session="/etc/shibboleth/sessionError.html"
+            metadata="/etc/shibboleth/metadataError.html"
+            access="/etc/shibboleth/accessError.html"
+            ssl="/etc/shibboleth/sslError.html"
+            localLogout="/etc/shibboleth/localLogout.html"
+            globalLogout="/etc/shibboleth/globalLogout.html"
+            supportContact="hongalex@usc.edu"
+            logoLocation="/shibboleth-sp/logo.jpg"
+            styleSheet="/shibboleth-sp/main.css"/>
+        
+        <MetadataProvider type="XML" 
+                          url="https://shibboleth.usc.edu/USC-metadata.xml"
+                          backingFilePath="USC-metadata.xml"
+                          reloadInterval="86400" />
+
+        <!-- Chain the two built-in trust engines together. -->
+        <TrustEngine type="Chaining">
+            <TrustEngine type="ExplicitKey"/>
+            <TrustEngine type="PKIX"/>
+        </TrustEngine>
+
+        <!-- Map to extract attributes from SAML assertions. -->
+        <AttributeExtractor type="XML" path="/etc/shibboleth/attribute-map.xml"/>
+        
+        <!-- Use a SAML query if no attributes are supplied during SSO. -->
+        <AttributeResolver type="Query"/>
+
+        <!-- Default filtering policy for recognized attributes, lets other data pass. -->
+        <AttributeFilter type="XML" path="/etc/shibboleth/attribute-policy.xml"/>
+
+        <!-- Simple file-based resolver for using a single keypair. -->
+        <CredentialResolver type="File" 
+                            key="/run/secrets/sp-key.pem" 
+                            certificate="/run/secrets/sp-cert.pem"/>
+
+        <!-- *************************************** -->
+        <!-- Custom application settings begin here. -->
+        <!-- *************************************** -->
+        
+        <!--
+            In the ApplicationOverride section:
+                id - should match the name you use in the RequestMapper
+                     Rename this value to the name of your application.
+                     If you have multiple applications, they will have 
+                     multiple ApplicationOverride sections with different id=""
+
+                entityID - should be set for you automatically by the generator
+                           please follow the instructions in detail from the website
+                           regarding your entityID.  This is an overall identifer
+                           for your application and should not be linked to a
+                           specific box, but should be a link into the space of 
+                           your overall departmental website.  It does not have
+                           to resolve to anything, but may one day be used to
+                           house a configuration file.
+
+                homeURL - this value will vary by machine.  This is where shibboleth
+                          will return when it can do nothing further with a request.
+
+                REMOTE_USER - If you would like the standard REMOTE_USER definition
+                              in the environment of your application, set this value.
+                              For example, if you receive uscNetID, you would set:
+                              REMOTE_USER="ShibuscNetID"
+                              (That is the identifier defined in attribute-map.xml)
+                               
+        -->
+
+        <ApplicationOverride id="rename--my-application-name"
+                             entityID="shibboleth-test/shibboleth-sp"
+                             homeURL="https://www.usc.edu/"
+                             REMOTE_USER="ShibuscNetID" />
+
+
+
+    </ApplicationDefaults>
+    
+    <!-- Policies that determine how to process and authenticate runtime messages. -->
+    <SecurityPolicyProvider type="XML" validate="true" path="security-policy.xml"/>
+
+</SPConfig>
