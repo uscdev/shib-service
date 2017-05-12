@@ -1,4 +1,5 @@
 # shib-service
+
 Base Apache Web Server with USC Shibboleth configuration.
 
 Use this container as a base for your web-based shib-protected applications.
@@ -43,3 +44,5 @@ appropriate shib conf files in the ````/etc/shibboleth```` directory.
 
 Note: For microservice implementations,
 use [shib-reverse-proxy](https://github.com/uscdev/shib-reverse-proxy).
+=======
+Shib Service Docker Container
