@@ -44,5 +44,3 @@ appropriate shib conf files in the ````/etc/shibboleth```` directory.
 
 Note: For microservice implementations,
 use [shib-reverse-proxy](https://github.com/uscdev/shib-reverse-proxy).
-=======
-Shib Service Docker Container
