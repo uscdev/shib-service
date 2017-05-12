@@ -20,11 +20,14 @@ COPY html /var/www/html/
 
 2. Install your ssl and shib keys as secrets
 
-Note: You must add the ssl cert for http access. Self signed certs are fine.
-The default shib keys for the USC test instance are located
+Note: Find the instructions for configuring USC shib [here](https://shibboleth.usc.edu/).
+You must add the ssl cert for http access. Self signed certs are fine.
+The test shib keys for the USC test instance are located
 in the container at */etc/shibboleth/sp-cert.key* and */etc/shibboleth/sp-cert.pem*.
 You can copy them out of the container by using the Docker cp command:
 ````docker cp [container-id]:/etc/shibboleth/sp-cert.pem ./````
+
+Add the secrets to your swarm:
 
 ````bash
 docker secret create sp-cert.pem sp-cert.pem
