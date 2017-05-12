@@ -3,6 +3,7 @@
 Base Apache Web Server with USC Shibboleth configuration.
 
 Use this container as a base for your web-based shib-protected applications.
+This container is tagged on docker hub as [uscdev/shib-service](https://hub.docker.com/r/uscdev/shib-service/).
 
 This container is designed to be extended. Create a new container based
 on this image and add content in the */var/www/html* directory.
