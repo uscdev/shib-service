@@ -1,6 +1,5 @@
 FROM uscdev/centos:7.3.1
 
-<<<<<<< HEAD
 # Thanks jtgasper3/centos-shibboleth-sp
 MAINTAINER Don Corley <dcorley@usc.edu>
 
@@ -30,14 +29,6 @@ COPY config/shibboleth-sp/attribute-policy.xml /etc/shibboleth/
 COPY config/shibboleth-sp/shibboleth2.xml /etc/shibboleth/
 COPY config/shibboleth-sp/USC-metadata.xml /etc/shibboleth/
 COPY config/conf.d/shib.conf /etc/httpd/conf.d/
-=======
-MAINTAINER Don Corley <dcorley@usc.edu>
-
-RUN yum -y update \
-    && yum -y install httpd
-
-COPY bin/startup.sh /startup.sh
->>>>>>> f68ce6b03b2d478527bb7ffe2733a0d3b42522c2
 
 EXPOSE 80 443
 
