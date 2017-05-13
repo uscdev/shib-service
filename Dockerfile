@@ -6,7 +6,7 @@ MAINTAINER Don Corley <dcorley@usc.edu>
 RUN yum -y update \
     && yum -y install httpd mod_ssl \
  	&& yum -y install openssl wget
-# RUN yum -y upgrade # Not required since base image is always patched \
+# RUN yum -y upgrade # Not required since base image is always patched
 
 RUN wget http://download.opensuse.org/repositories/security://shibboleth/CentOS_7/security:shibboleth.repo -P /etc/yum.repos.d \
     && yum -y install shibboleth.x86_64 \
