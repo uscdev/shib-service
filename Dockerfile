@@ -1,4 +1,4 @@
-FROM uscdev/centos:7.3.1
+FROM uscdev/centos
 
 # Thanks jtgasper3/centos-shibboleth-sp
 MAINTAINER Don Corley <dcorley@usc.edu>
