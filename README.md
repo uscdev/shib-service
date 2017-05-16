@@ -31,6 +31,7 @@ You can copy them out of the container by using the Docker cp command:
 Add the secrets to your swarm:
 
 ````bash
+docker swarm init   # Only do this once
 docker secret create sp-cert.pem sp-cert.pem
 docker secret create sp-cert.key sp-cert.key
 docker secret create apache.crt apache.crt
