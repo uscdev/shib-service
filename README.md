@@ -43,7 +43,9 @@ docker secret create apache.key apache.key
 docker stack deploy --compose-file docker-compose.yml app-name
 ````
 
-4. Bring up the sample web page: [http://localhost]
+4. Bring up the sample web page: <http://localhost>. Note that apache will auto-forward
+the URL to https. Also you will be redirected to the USC test shib sign-on. Click the 
+attribute link to see the Shib parameters passed to the app.
 
 5. For production deployments, create a new shib key and mount the
 appropriate shib conf files in the ````/etc/shibboleth```` directory.
