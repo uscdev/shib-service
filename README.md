@@ -43,7 +43,9 @@ docker secret create apache.key apache.key
 docker stack deploy --compose-file docker-compose.yml app-name
 ````
 
-4. For production deployments, create a new shib key and mount the
+4. Bring up the sample web page: [http://localhost]
+
+5. For production deployments, create a new shib key and mount the
 appropriate shib conf files in the ````/etc/shibboleth```` directory.
 
 Note: For microservice implementations,
