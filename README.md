@@ -53,3 +53,6 @@ appropriate shib conf files in the ````/etc/shibboleth```` directory.
 
 Note: For microservice implementations,
 use [shib-reverse-proxy](https://github.com/uscdev/shib-reverse-proxy).
+
+Note: Any pages that don't require shib should go into the ````unprotected```` folder.
+This implementation includes a health check page at: https://&lt;host&gt;/unprotected/health.html 
