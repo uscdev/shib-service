@@ -1,5 +1,9 @@
 # shib-service
 
+NOTE: Fix the Dockerfile shib repo setup. I had to hack this
+to supply a static repo entry rather that using the correct
+command due to a bug in the current shib repo.
+
 Base Apache Web Server with USC Shibboleth configuration.
 
 Use this container as a base for your web-based shib-protected applications.
