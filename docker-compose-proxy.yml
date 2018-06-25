@@ -1,0 +1,55 @@
+version: '3.6'
+services:
+  shib-service:
+    image: uscdev/shib-proxy-service
+#    ports:
+#      - 80:80
+#      - 443:443
+    environment:
+      - SERVER_NAME=${SERVER_NAME}
+    networks:
+      proxy:
+    secrets:
+      - apache.crt
+      - apache.key
+      - sp-key.pem
+      - sp-cert.pem
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+      labels:
+        - com.df.notify=true
+        - com.df.distribute=true
+        - com.df.serviceDomain=workday-account-translator.usc.edu
+        - com.df.httpsOnly=true
+        - com.df.port=443
+        - com.df.sslVerifyNone=true
+  shib-test-site:
+    image: uscdev/shib-test-site
+    networks:
+      - proxy
+#    ports:
+#      - 8985:80
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+networks:
+  proxy:
+    external: true
+secrets:
+  apache.crt:
+    external: true
+  apache.key:
+    external: true
+  sp-key.pem:
+    external: true
+  sp-cert.pem:
+    external: true

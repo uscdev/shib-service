@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3.6'
 services:
   shib-service:
     image: uscdev/shib-service
@@ -8,7 +8,7 @@ services:
     environment:
       - SERVER_NAME=${SERVER_NAME}
     networks:
-      web-bus:
+      proxy:
     secrets:
       - apache.crt
       - apache.key
@@ -22,9 +22,8 @@ services:
       restart_policy:
         condition: on-failure
 networks:
-  web-bus:
-    external:
-      name: web-bus
+  proxy:
+    external: true
 secrets:
   apache.crt:
     external: true
