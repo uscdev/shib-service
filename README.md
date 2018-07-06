@@ -15,7 +15,7 @@ You can find an example [here](https://github.com/uscdev/shib-service-example).
 
 ### Usage
 
-1. Create a Dockerfile based on this image and add your code and content
+1. Create a Dockerfile based on this image. Add your code and content
 
 ````dockerfile
 FROM uscdev/shib-service
@@ -55,8 +55,16 @@ attribute link to see the Shib parameters passed to the app.
 5. For production deployments, create a new shib key and mount the
 appropriate shib conf files in the ````/etc/shibboleth```` directory.
 
-Note: For microservice implementations,
-use [shib-reverse-proxy](https://github.com/uscdev/shib-reverse-proxy).
+#### To use shib-service as a reverse-proxy, pass the PROXY_URL parameter.
+docker-compose snippet:
+````dockerfile
+    environment:
+      - SERVER_NAME=${SERVER_NAME}
+      - PROXY_URL=http://shib-test-site/
+````
+
+Note: If you prefer NGINX, Use this microservice implementation:
+ [shib-reverse-proxy](https://github.com/uscdev/shib-reverse-proxy).
 
 Note: Any pages that don't require shib should go into the ````unprotected```` folder.
 This implementation includes a health check page at: https://&lt;host&gt;/unprotected/health.html 
