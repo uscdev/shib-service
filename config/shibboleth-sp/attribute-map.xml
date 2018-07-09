@@ -64,7 +64,30 @@
     <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscPvid"               id="ShibuscPvid" />
     <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscAffiliation"        id="ShibuscAffiliation" />
     <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscPrimaryAffiliation" id="ShibuscPrimaryAffiliation" />
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscDisplayGivenName"   id="ShibgivenName" aliases="firstName"/>
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscDisplaySn"          id="Shibsurname" aliases="lastName"/>
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscTitle"              id="ShibTitle" aliases="title"/>
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscEmployeeHomeDivision"           id="ShibHomeDivision" aliases="homeDivision"/>
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscEmployeeHomeDepartment"         id="ShibHomeDepartment" aliases="homeDepartment"/>
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscEmployeeHomeDepartmentCode"     id="ShibEmployeeHomeDepartmentCode" aliases="EmployeeHomeDepartmentCode"/>
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscEmployeeOfficeTelephoneNumber"  id="ShibEmployeeOfficeTelephoneNumber" aliases="EmployeeOfficeTelephoneNumber"/>
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscOfficeAddressLine1"             id="ShibOfficeAddressLine1" aliases="OfficeAddressLine1"/>
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscOfficeAddressBuildingCode"      id="ShibOfficeAddressBuildingCode" aliases="OfficeAddressBuildingCode"/>
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscOfficeAddressCampusCode"        id="ShibOfficeAddressCampusCode" aliases="OfficeAddressCampusCode"/>
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscOfficeAddressCampusDescription" id="ShibOfficeAddressCampusDescription" aliases="OfficeAddressCampusDescription"/>
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscEmployeeRegion"        id="ShibEmployeeRegion" aliases="EmployeeRegion"/>
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscEmployeeMunicipality"  id="ShibuscEmployeeMunicipality" aliases="EmployeeMunicipality"/>
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscOfficeAddressMailCode" id="ShibOfficeAddressMailCode" aliases="OfficeAddressMailCode"/>
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscMajorOwningSchool"     id="ShibMajorOwningSchool" aliases="MajorOwningSchool"/>
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscMajorOwningSchoolCode" id="ShibMajorOwningSchoolCode" aliases="MajorOwningSchoolCode"/>
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscMajorOwningSchoolDescription" id="ShibMajorOwningSchoolDescription" aliases="MajorOwningSchoolDescription"/>
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscMajorOwningSchoolNextTerm"     id="ShibMajorOwningSchoolNextTerm" aliases="MajorOwningSchoolNextTerm"/>
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscMajorOwningSchoolCodeNextTerm" id="ShibMajorOwningSchoolCodeNextTerm" aliases="MajorOwningSchoolCodeNextTerm"/>
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscMajorOwningSchoolDescriptionNextTerm" id="ShibMajorOwningSchoolDescriptionNextTerm" aliases="MajorOwningSchoolDescriptionNextTerm"/>
 
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscMajorPOSTCode" id="ShibMajorPOSTCode" aliases="MajorOwningPOSTCode"/>
+    <Attribute name="urn:mace:usc.edu:gds:attribute-def:uscMajorDescription" id="ShibMajorDescription" aliases="MajorDescription"/>
+    
     <!--
         Some attributes are scoped (meaning they have @usc.edu attached).  Here is an example. 
     -->
