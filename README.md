@@ -63,6 +63,15 @@ docker-compose snippet:
       - PROXY_URL=http://shib-test-site/
 ````
 
+Remember to pass parameters to the proxy using mod rewrite (in the ssl.conf file):
+````bash
+RewriteEngine on
+
+RewriteCond %{ShibdisplayName} (.*)
+RewriteRule ^ - [E=ShibdisplayName:%{LA-U:ShibdisplayName}]
+RequestHeader set Shibmail %{ShibdisplayName}e
+````
+
 Note: If you prefer NGINX, Use this microservice implementation:
  [shib-reverse-proxy](https://github.com/uscdev/shib-reverse-proxy).
 
