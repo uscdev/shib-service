@@ -3,12 +3,15 @@ FROM uscdev/centos
 # Thanks jtgasper3/centos-shibboleth-sp
 MAINTAINER Don Corley <dcorley@usc.edu>
 
+ENV USC_CENTOS_VERSION 7.4.0
+ENV SHIB_VERSION=2.61
+ENV APACHE_VERSION=
+
 RUN yum -y update \
     && yum -y install httpd mod_ssl \
  	&& yum -y install openssl wget
 # RUN yum -y upgrade # Not required since base image is always patched
 
-RUN echo -e "xyz \n abc"  > xyz
 RUN echo -e "\
 [shibboleth]\n\
 name=Shibboleth (CentOS_7)\n\
@@ -17,8 +20,11 @@ mirrorlist=https://shibboleth.net/cgi-bin/mirrorlist.cgi/CentOS_7\n\
 gpgcheck=1\n\
 gpgkey=https://downloadcontent.opensuse.org/repositories/security:/shibboleth/CentOS_7/repodata/repomd.xml.key\n\
 enabled=1" > /etc/yum.repos.d/shibboleth.repo
-RUN yum -y install shibboleth.x86_64 \
+
+RUN yum -y install shibboleth-2.6.1-3.1.x86_64 \
     && yum -y clean all
+# RUN yum -y install shibboleth.x86_64 \
+#    && yum -y clean all
 # RUN wget http://download.opensuse.org/repositories/security://shibboleth/CentOS_7/security:shibboleth.repo -P /etc/yum.repos.d \
 #    && yum -y install shibboleth.x86_64 \
 #    && yum -y clean all
