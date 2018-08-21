@@ -55,12 +55,14 @@ attribute link to see the Shib parameters passed to the app.
 5. For production deployments, create a new shib key and mount the
 appropriate shib conf files in the ````/etc/shibboleth```` directory.
 
-#### To use shib-service as a reverse-proxy, pass the PROXY_URL parameter.
+#### To use shib-service as a reverse-proxy, pass the PROXY_URL parameter
+#### To enable the WebSocket proxy, set the WEBSOCKET_URL parameter.
 docker-compose snippet:
 ````dockerfile
     environment:
       - SERVER_NAME=${SERVER_NAME}
       - PROXY_URL=http://shib-test-site/
+      - WEBSOCKET_URL=ws://shib-test-site/
 ````
 
 Remember to pass parameters to the proxy using mod rewrite (in the ssl.conf file):

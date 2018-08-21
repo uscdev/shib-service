@@ -8,6 +8,7 @@ services:
     environment:
       - SERVER_NAME=${SERVER_NAME}
       - PROXY_URL=http://shib-test-site/
+      - WEBSOCKET_URL=ws://shib-test-site/
     networks:
       proxy:
     secrets:
