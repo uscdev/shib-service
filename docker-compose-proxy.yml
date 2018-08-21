@@ -7,8 +7,10 @@ services:
       - 443:443
     environment:
       - SERVER_NAME=${SERVER_NAME}
-      - PROXY_URL=http://shib-test-site/
-      - WEBSOCKET_URL=ws://shib-test-site/
+      - PROXY_URL=http://shib-test-site:4200/
+      - WEBSOCKET_URL=ws://shib-test-site:4200/
+      - ALT_PROXY_PATH=/backend_express
+      - ALT_PROXY_URL=http://shib-test-site2/backend_express
     networks:
       proxy:
     secrets:
@@ -31,11 +33,24 @@ services:
         - com.df.port=443
         - com.df.sslVerifyNone=true
   shib-test-site:
-    image: uscdev/shib-test-site
+    image: uscdev/my-app
     networks:
       - proxy
-#    ports:
-#      - 8985:80
+    #    ports:
+    #      - 8985:80
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+  shib-test-site2:
+    image: uscdev/shib-test-site2
+    networks:
+      - proxy
+    ports:
+      - 8985:80
     deploy:
       replicas: 1
       update_config:

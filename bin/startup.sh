@@ -13,6 +13,18 @@ else
 \#\ ENDREVERSEPROXY" /etc/httpd/conf.d/ssl.conf
 fi
 
+if [ "$ALT_PROXY_URL" != "" ]; then
+    sed -i -e "/\#\ BEGINALTREVERSEPROXY/,/\#\ ENDALTREVERSEPROXY/c\\#\ BEGINALTREVERSEPROXY\n\
+ProxyPass \"$ALT_PROXY_PATH\" \"$ALT_PROXY_URL\"\n\
+ProxyPassReverse \"$ALT_PROXY_PATH\" \"$ALT_PROXY_URL\"\n\
+\#\ ENDALTREVERSEPROXY" /etc/httpd/conf.d/ssl.conf
+else
+    sed -i -e "/\#\ BEGINALTREVERSEPROXY/,/\#\ ENDALTREVERSEPROXY/c\\#\ BEGINALTREVERSEPROXY\n\
+\# ProxyPass \"/\" \"http\:\/\/shib-test2\/\"\n\
+\# ProxyPassReverse \"/alt\" \"http\:\/\/shib-test2\/\"\n\
+\#\ ENDALTREVERSEPROXY" /etc/httpd/conf.d/ssl.conf
+fi
+
 if [ "$WEBSOCKET_URL" != "" ]; then
     sed -i -e "/\#\ BEGINWEBSOCKET/,/\#\ ENDWEBSOCKET/c\\#\ BEGINWEBSOCKET\n\
 RewriteCond \%\{HTTP\:Upgrade\} \=websocket \[NC\]\n\
