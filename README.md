@@ -57,12 +57,16 @@ appropriate shib conf files in the ````/etc/shibboleth```` directory.
 
 #### To use shib-service as a reverse-proxy, pass the PROXY_URL parameter
 #### To enable the WebSocket proxy, set the WEBSOCKET_URL parameter.
+#### To enable a path to an alternate container, use ALT_PROXY_URL 
 docker-compose snippet:
 ````dockerfile
     environment:
       - SERVER_NAME=${SERVER_NAME}
       - PROXY_URL=http://shib-test-site/
       - WEBSOCKET_URL=ws://shib-test-site/
+      - ALT_PROXY_PATH=/backend_express
+      - ALT_PROXY_URL=http://shib-test-site2/backend_express
+      
 ````
 
 Remember to pass parameters to the proxy using mod rewrite (in the ssl.conf file):
