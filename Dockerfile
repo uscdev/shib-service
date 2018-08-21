@@ -3,6 +3,11 @@ FROM uscdev/centos
 # Thanks jtgasper3/centos-shibboleth-sp
 MAINTAINER Don Corley <dcorley@usc.edu>
 
+ENV USC_CENTOS_VERSION 7.4.0
+# Remember to include the leading '-' if you are supplying a shib version
+ENV SHIB_VERSION=-2.6.1-3.1
+ENV APACHE_VERSION=
+
 RUN yum -y update \
     && yum -y install httpd mod_ssl \
  	&& yum -y install openssl wget
@@ -17,8 +22,10 @@ gpgcheck=1\n\
 gpgkey=https://downloadcontent.opensuse.org/repositories/security:/shibboleth/CentOS_7/repodata/repomd.xml.key\n\
 enabled=1" > /etc/yum.repos.d/shibboleth.repo
 
-RUN yum -y install shibboleth.x86_64 \
+RUN yum -y install shibboleth$SHIB_VERSION.x86_64 \
     && yum -y clean all
+# RUN yum -y install shibboleth.x86_64 \
+#    && yum -y clean all
 # RUN wget http://download.opensuse.org/repositories/security://shibboleth/CentOS_7/security:shibboleth.repo -P /etc/yum.repos.d \
 #    && yum -y install shibboleth.x86_64 \
 #    && yum -y clean all
