@@ -5,7 +5,7 @@ MAINTAINER Don Corley <dcorley@usc.edu>
 
 ENV USC_CENTOS_VERSION 7.4.0
 # Remember to include the leading '-' if you are supplying a shib version
-ENV SHIB_VERSION=-2.6.1-3.1
+ENV SHIB_VERSION=
 ENV APACHE_VERSION=
 
 RUN yum -y update \
