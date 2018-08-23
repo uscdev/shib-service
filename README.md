@@ -86,7 +86,10 @@ This implementation includes a health check page at: https://&lt;host&gt;/unprot
 
 #### Health
 
-This container has a built-in healthcheck. You can do a external healthcheck by requesting `https://yoursite.com/Shibboleth.sso/Session`. You should add a healthcheck to your container.
+This container has a built-in healthcheck.
+You can do a external healthcheck by requesting `https://yoursite.com/Shibboleth.sso/Session`.
+If you receive "A valid session was not found." you are good.
+You should add a healthcheck to your container.
 Since the path `/unprotected/health.html` is not shib protected, you should use the following healthcheck:
 
 ````
