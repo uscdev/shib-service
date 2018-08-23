@@ -83,3 +83,12 @@ Note: If you prefer NGINX, Use this microservice implementation:
 
 Note: Any pages that don't require shib should go into the ````unprotected```` folder.
 This implementation includes a health check page at: https://&lt;host&gt;/unprotected/health.html 
+
+#### Health
+
+This container has a built-in healthcheck. You should add a healthcheck to your container.
+Since the path `/unprotected/health.html` is not shib protected, you should use the following healthcheck:
+
+````
+HEALTHCHECK CMD curl -f http://localhost/unprotected/health.html || exit 1
+````

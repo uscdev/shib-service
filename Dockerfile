@@ -50,6 +50,8 @@ COPY config/conf.d/shib.conf /etc/httpd/conf.d/
 
 COPY html/unprotected /var/www/html/unprotected
 
+HEALTHCHECK CMD curl -f https://device-registration.usc.edu/Shibboleth.sso/Session || exit 1
+
 EXPOSE 80 443
 
 CMD ["startup.sh"]
