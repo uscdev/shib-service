@@ -3,6 +3,7 @@ set -e
 
 if [ "$PROXY_URL" != "" ]; then
     sed -i -e "/\#\ BEGINREVERSEPROXY/,/\#\ ENDREVERSEPROXY/c\\#\ BEGINREVERSEPROXY\n\
+ProxyPass \"/unprotected/local\" \"\!\"\n\
 ProxyPass \"/\" \"$PROXY_URL\"\n\
 ProxyPassReverse \"/\" \"$PROXY_URL\"\n\
 \#\ ENDREVERSEPROXY" /etc/httpd/conf.d/ssl.conf

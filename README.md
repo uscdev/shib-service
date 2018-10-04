@@ -82,7 +82,9 @@ Note: If you prefer NGINX, Use this microservice implementation:
  [shib-reverse-proxy](https://github.com/uscdev/shib-reverse-proxy).
 
 Note: Any pages that don't require shib should go into the ````unprotected```` folder.
-This implementation includes a health check page at: https://&lt;host&gt;/unprotected/health.html 
+This implementation includes a health check page at: `https://<host>/unprotected/health.html` 
+If you are using a reverse proxy, use the health check page at: `https://<host>/unprotected/local/health.html`
+and place your application's healthcheck page at `https://<host>/unprotected/health.html`.
 
 #### Health
 
